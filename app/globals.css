@@ -121,6 +121,9 @@
   * {
     @apply border-border outline-ring/50;
   }
+  button, a, [role="button"], label[for], input[type="radio"], input[type="checkbox"], select {
+    cursor: pointer;
+  }
   body {
     @apply text-foreground font-sans;
     background: var(--background);
@@ -143,6 +146,11 @@
   h2 { @apply text-2xl font-normal tracking-tight; }
   h3 { @apply text-lg font-medium; }
 }
+
+/* Custom scrollbar */
+.custom-scroll::-webkit-scrollbar { width: 4px; }
+.custom-scroll::-webkit-scrollbar-track { background: transparent; }
+.custom-scroll::-webkit-scrollbar-thumb { background: oklch(1 0 0 / 0.15); border-radius: 2px; }
 
 /* Aurora border cards */
 @property --angle {
@@ -242,6 +250,10 @@
   .card-premium-active::after {
     opacity: 0.3;
   }
+
+/* KaTeX dark theme */
+.prose-math .katex { color: white; }
+.prose-math .katex-display { margin: 1rem 0; }
 
   .card-premium:hover {
     background: linear-gradient(

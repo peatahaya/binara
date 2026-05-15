@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { useRouter, usePathname } from "next/navigation"
-import { GraduationCap, BookOpen, CreditCard, CalendarCheck, FolderOpen, LogOut } from "lucide-react"
+import { GraduationCap, BookOpen, CreditCard, CalendarCheck, FolderOpen, LogOut, Sparkles } from "lucide-react"
 import { Button, buttonVariants } from "@/components/ui/button"
 import { createClient } from "@/lib/supabase/client"
 import { cn } from "@/lib/utils"
@@ -12,6 +12,8 @@ const links = [
   { href: "/student/lekcje", label: "Moje lekcje", icon: BookOpen },
   { href: "/student/platnosci", label: "Płatności", icon: CreditCard },
   { href: "/student/umow", label: "Umów lekcję", icon: CalendarCheck },
+  { href: "/student/ai-tutor", label: "AI Tutor", icon: Sparkles },
+  { href: "/student/materialy", label: "Materiały", icon: FolderOpen },
 ]
 
 export function SiteNavStudent() {
@@ -34,7 +36,7 @@ export function SiteNavStudent() {
       }}
     >
       <Link href="/student" className="text-lg tracking-tight">
-        <span className="font-bold">mathrix</span>
+        <span style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400 }}>binara</span>
       </Link>
 
       <div className="flex items-center gap-1">
@@ -57,17 +59,6 @@ export function SiteNavStudent() {
             </Link>
           )
         })}
-
-        <span
-          className={cn(
-            buttonVariants({ variant: "ghost", size: "sm" }),
-            "flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-white/25 cursor-default pointer-events-none"
-          )}
-          title="Wkrótce"
-        >
-          <FolderOpen className="size-4" />
-          Materiały
-        </span>
 
         <Button
           variant="outline"

@@ -44,7 +44,7 @@ export function SiteNav({ role }: SiteNavProps) {
       }}
     >
       <Link href={role === "tutor" ? "/tutor" : "/student"} className="text-lg tracking-tight">
-        <span className="font-bold">mathrix</span>
+        <span style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400 }}>binara</span>
       </Link>
 
       <div className="flex items-center gap-1">

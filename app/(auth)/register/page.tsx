@@ -60,9 +60,7 @@ export default function RegisterPage() {
         <GlassCard className="w-full max-w-sm text-center">
           <div className="flex items-center justify-center gap-2 mb-8">
             <GraduationCap className="size-6 text-primary" />
-            <span className="text-xl font-semibold">
-              mathrix
-            </span>
+            <span style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400 }}>binara</span>
           </div>
           <p className="text-lg font-medium mb-2">Sprawdź skrzynkę!</p>
           <p className="text-muted-foreground text-sm mb-2">

@@ -6,7 +6,9 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog"
 import { Mail, Phone, Plus } from "lucide-react"
+import Link from "next/link"
 import { addStudent } from "./actions"
+import { InviteDialog } from "./invite-dialog"
 
 type Student = {
   id: string
@@ -39,7 +41,10 @@ export function UczniowieContent({ students }: { students: Student[] }) {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-semibold">Uczniowie</h1>
-        <Button onClick={() => setOpen(true)}><Plus className="size-4" /> Dodaj ucznia</Button>
+        <div className="flex gap-2">
+          <InviteDialog />
+          <Button onClick={() => setOpen(true)}><Plus className="size-4" /> Dodaj ucznia</Button>
+        </div>
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogContent className="sm:max-w-md">
             <DialogHeader>
@@ -70,25 +75,27 @@ export function UczniowieContent({ students }: { students: Student[] }) {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {students.map((s, i) => (
-          <GlassCard key={s.id} delay={i * 0.05} clickable>
-            <p className="font-semibold text-lg">{s.imie} {s.nazwisko}</p>
-            {s.klasa && <p className="text-sm text-muted-foreground mt-0.5">{s.klasa}</p>}
-            {s.stawka_godzinowa && (
-              <p className="text-primary font-medium mt-2">{s.stawka_godzinowa} zł/h</p>
-            )}
-            <div className="flex flex-col gap-1 mt-3">
-              {s.rodzic_email && (
-                <span className="text-xs text-muted-foreground flex items-center gap-1.5">
-                  <Mail className="size-3" /> {s.rodzic_email}
-                </span>
+          <Link key={s.id} href={`/tutor/uczniowie/${s.id}`}>
+            <GlassCard delay={i * 0.05} clickable>
+              <p className="font-semibold text-lg">{s.imie} {s.nazwisko}</p>
+              {s.klasa && <p className="text-sm text-muted-foreground mt-0.5">{s.klasa}</p>}
+              {s.stawka_godzinowa && (
+                <p className="text-primary font-medium mt-2">{s.stawka_godzinowa} zł/h</p>
               )}
-              {s.rodzic_telefon && (
-                <span className="text-xs text-muted-foreground flex items-center gap-1.5">
-                  <Phone className="size-3" /> {s.rodzic_telefon}
-                </span>
-              )}
-            </div>
-          </GlassCard>
+              <div className="flex flex-col gap-1 mt-3">
+                {s.rodzic_email && (
+                  <span className="text-xs text-muted-foreground flex items-center gap-1.5">
+                    <Mail className="size-3" /> {s.rodzic_email}
+                  </span>
+                )}
+                {s.rodzic_telefon && (
+                  <span className="text-xs text-muted-foreground flex items-center gap-1.5">
+                    <Phone className="size-3" /> {s.rodzic_telefon}
+                  </span>
+                )}
+              </div>
+            </GlassCard>
+          </Link>
         ))}
       </div>
     </div>

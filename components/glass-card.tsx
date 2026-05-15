@@ -8,9 +8,10 @@ interface GlassCardProps {
   children: React.ReactNode
   clickable?: boolean
   delay?: number
+  aurora?: boolean
 }
 
-export function GlassCard({ className, children, clickable, delay = 0 }: GlassCardProps) {
+export function GlassCard({ className, children, clickable, delay = 0, aurora = false }: GlassCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
@@ -20,6 +21,7 @@ export function GlassCard({ className, children, clickable, delay = 0 }: GlassCa
       whileHover={clickable ? { scale: 1.02, y: -2 } : { y: -2 }}
       className={cn(
         "card-premium p-6",
+        aurora && "card-premium-active",
         className
       )}
     >

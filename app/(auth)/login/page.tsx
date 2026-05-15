@@ -64,9 +64,7 @@ function LoginForm() {
       <GlassCard className="w-full max-w-sm">
         <div className="flex items-center gap-2 mb-8">
           <GraduationCap className="size-6 text-primary" />
-          <span className="text-xl font-semibold">
-            mathrix
-          </span>
+          <span style={{ fontFamily: "var(--font-fraunces)", fontWeight: 400 }}>binara</span>
         </div>
 
         {urlError === "verification_failed" && (

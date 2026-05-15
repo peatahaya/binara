@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(rm -rf .next)",
+      "Bash(npm run:*)",
+      "Bash(taskkill /PID 44428 /F)",
+      "Bash(kill 44428)"
+    ]
+  }
+}

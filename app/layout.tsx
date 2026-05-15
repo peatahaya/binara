@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
+import { CursorGlow } from "@/components/cursor-glow";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -9,7 +10,7 @@ const roboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "mathrix — panel korepetytora",
+  title: "binara",
   description: "Aplikacja do zarządzania lekcjami matematyki, wpłatami i terminami",
 };
 
@@ -23,7 +24,8 @@ export default function RootLayout({
       lang="pl"
       className={`${roboto.variable} dark h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col"><CursorGlow />{children}</body>
     </html>
   );
 }
+ 
