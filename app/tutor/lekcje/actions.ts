@@ -25,3 +25,10 @@ export async function addLesson(formData: FormData) {
   revalidatePath("/tutor/lekcje")
   return null
 }
+
+export async function saveGrade(lessonId: string, ocena: number) {
+  const supabase = await createClient()
+  await supabase.from("lessons").update({ ocena }).eq("id", lessonId)
+  revalidatePath("/tutor/lekcje")
+  return { success: true }
+}

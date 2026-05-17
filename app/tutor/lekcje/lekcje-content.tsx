@@ -11,8 +11,9 @@ import { Plus } from "lucide-react"
 import { format, isSameDay, parseISO } from "date-fns"
 import { pl } from "date-fns/locale"
 import { addLesson } from "./actions"
+import { GradeInput } from "./grade-input"
 
-type Lesson = { id: string; data_start: string; dlugosc_min: number; status: string; temat: string | null; students: { imie: string; nazwisko: string } | null }
+type Lesson = { id: string; data_start: string; dlugosc_min: number; status: string; temat: string | null; ocena: number | null; students: { imie: string; nazwisko: string } | null }
 type Student = { id: string; imie: string; nazwisko: string }
 
 const statusLabels: Record<string, string> = { zaplanowana: "Zaplanowana", odbyta: "Odbyta", odwolana: "Odwołana" }
@@ -86,6 +87,11 @@ export function LekcjeContent({ lessons, students }: { lessons: Lesson[]; studen
                   <span className="text-xs text-muted-foreground">{l.dlugosc_min} min</span>
                   <Badge variant={statusVariants[l.status]}>{statusLabels[l.status]}</Badge>
                 </div>
+                {l.status === "odbyta" && (
+                  <div className="mt-2 flex justify-end">
+                    <GradeInput lessonId={l.id} currentGrade={l.ocena ?? null} />
+                  </div>
+                )}
               </div>
             </GlassCard>
           ))}

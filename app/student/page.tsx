@@ -3,6 +3,7 @@ import { getProfile } from "@/lib/auth/get-profile"
 import { createClient } from "@/lib/supabase/server"
 import { GlassCard } from "@/components/glass-card"
 import { Badge } from "@/components/ui/badge"
+import { ProgressChart } from "@/components/progress-chart"
 import { format, parseISO, startOfMonth, endOfMonth, startOfWeek, endOfWeek } from "date-fns"
 import { pl } from "date-fns/locale"
 
@@ -34,6 +35,7 @@ export default async function StudentDashboard() {
     { data: lessonsUpcoming },
     { data: payments },
     { data: lessonsThisMonth },
+    { data: lessonsWithGrades },
   ] = await Promise.all([
     supabase.from("students").select("imie, stawka_godzinowa").eq("id", profile.student_id).single(),
     supabase.from("lessons").select("id, data_start, dlugosc_min, status, temat")
@@ -45,6 +47,10 @@ export default async function StudentDashboard() {
       .eq("student_id", profile.student_id).eq("status", "odbyta")
       .gte("data_start", startOfMonth(now).toISOString())
       .lte("data_start", endOfMonth(now).toISOString()),
+    supabase.from("lessons").select("data_start, ocena, temat")
+      .eq("student_id", profile.student_id).eq("status", "odbyta")
+      .not("ocena", "is", null)
+      .order("data_start", { ascending: true }),
   ])
 
   const stawka = student?.stawka_godzinowa ?? 0
@@ -60,6 +66,12 @@ export default async function StudentDashboard() {
   }).length
 
   const nextLesson = lessonsUpcoming?.[0]
+
+  const chartData = (lessonsWithGrades ?? []).map(l => ({
+    date: format(parseISO(l.data_start), "d MMM", { locale: pl }),
+    ocena: l.ocena as number,
+    temat: l.temat,
+  }))
 
   return (
     <div className="space-y-8">
@@ -87,6 +99,13 @@ export default async function StudentDashboard() {
           <p className="text-5xl font-light">{Math.round(sumaWplat)} zł</p>
         </GlassCard>
       </div>
+
+      {chartData.length > 0 && (
+        <GlassCard>
+          <p className="text-xs uppercase tracking-widest text-white/50 mb-4">Postęp</p>
+          <ProgressChart data={chartData} />
+        </GlassCard>
+      )}
 
       <div className="space-y-3">
         <h2 className="mb-4 flex items-center gap-2">Najbliższe lekcje</h2>
