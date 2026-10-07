@@ -1,5 +1,16 @@
 # Binara
 
+## NOIZANA Ownership
+
+| Field | Value |
+|---|---|
+| Unit | **NOIZANA LEARNING** |
+| Project | **BINARA** |
+| State | **INCUBATOR** |
+| Source of truth | **PROYARA** |
+| Task tracking | **Linear** |
+| Implementation evidence | **GitHub** |
+
 > Fullstack math tutoring management app. Tutors manage students, lessons, and payments; students book sessions and track progress; an AI Tutor solves photographed math problems step by step.
 
 ![Status](https://img.shields.io/badge/status-in_development-yellow)
