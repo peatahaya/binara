@@ -1,0 +1,10 @@
+version: 1
+group: NOIZANA
+unit: "NOIZANA LEARNING"
+project: "BINARA"
+state: "INCUBATOR"
+source_of_truth: PROYARA
+task_tracking: Linear
+implementation_evidence: GitHub
+contributors:
+  - "NOIZANA SYSTEMS"
